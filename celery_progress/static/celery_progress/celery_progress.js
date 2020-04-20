@@ -48,7 +48,7 @@ var CeleryProgressBar = (function () {
                     if (data.success) {
                         onSuccess(progressBarElement, progressBarMessageElement, data.result);
                     } else {
-                        onError(progressBarElement, progressBarMessageElement, data.progress);
+                        onError(progressBarElement, progressBarMessageElement, data.result);
                     }
                     if (data.result) {
                         onResult(resultElement, data.result);

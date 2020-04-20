@@ -61,21 +61,14 @@ class Progress(object):
         self.result = AsyncResult(task_id)
 
     def get_info(self):
-        if self.result.state == 'FAILURE':
-            success = self.result.successful()
-            return {
-                'complete': True,
-                'success': success,
-                'progress': str(self.result.info),
-            }
-        elif self.result.ready():
+        if self.result.ready():
             success = self.result.successful()
             with allow_join_result():
                 return {
                     'complete': True,
                     'success': success,
                     'progress': _get_completed_progress(),
-                    'result': self.result.get(self.task_id) if success else None,
+                    'result': self.result.get(self.task_id) if success else str(self.result.info),
                 }
         elif self.result.state == PROGRESS_STATE:
             return {
